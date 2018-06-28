@@ -28,9 +28,16 @@ class Net(nn.Module):
         self.conv2 = nn.Conv2d(32,  64, 2)
         #55X55X64
         self.pool2= nn.MaxPool2d(2,2)
-        
-        self.fc1= nn.Linear(55*55*64,136)
-        self.dropout = nn.Dropout(p=0.3)
+        #(W-F)/S +1 = (55-4)/1 +1 = 52
+        self.conv3 = nn.Conv2d(64,  128, 4)
+        #26X26X128
+        self.pool3 = nn.MaxPool2d(2,2)
+        #(W-F)/S +1 = (26-1)/1 +1 = 26
+      
+        self.fc1= nn.Linear(26*26*128,512)
+        self.fc2= nn.Linear(512,136)
+
+        self.dropout = nn.Dropout(p=0.1)
      
         
         
@@ -42,12 +49,16 @@ class Net(nn.Module):
     def forward(self, x):
         ## Define the feedforward behavior of this model
        
-        x= self.pool1(F.relu(self.conv1(x)))
+        x= self.pool1(F.elu(self.conv1(x)))
         x= self.dropout(x)
-        x= self.pool2(F.relu(self.conv2(x)))
+        x= self.pool2(F.elu(self.conv2(x)))
+        x= self.dropout(x)
+        x= self.pool3(F.elu(self.conv3(x)))
         x= self.dropout(x)
         x = x.view(x.size(0), -1)
-        x= F.relu(self.fc1(x))
+        x= F.elu(self.fc1(x))
+        x= self.dropout(x)
+        x= F.elu(self.fc2(x))
         x= self.dropout(x)
        
         # a modified x, having gone through all the layers of your model, should be returned
