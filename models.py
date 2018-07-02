@@ -66,8 +66,8 @@ class Net(nn.Module):
         x = x.view(x.size(0), -1)
         x= F.selu(self.fc1(x))
         x= self.dropout(x)
-        x= F.selu(self.fc2(x))
-        x= self.dropout(x)
+        x= self.fc2(x)
+
        
         # a modified x, having gone through all the layers of your model, should be returned
         return x
