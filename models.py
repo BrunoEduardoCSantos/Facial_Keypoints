@@ -1,4 +1,4 @@
-## TODO: define the convolutional neural network architecture
+## define the convolutional neural network architecture
 
 import torch
 import torch.nn as nn
@@ -35,12 +35,17 @@ class Net(nn.Module):
         #torch.nn.init.xavier_normal_( self.conv3.weight)
         #26X26X128
         self.pool3 = nn.MaxPool2d(2,2)
-        #(W-F)/S +1 = (26-1)/1 +1 = 26
-        self.conv4 = nn.Conv2d(128,  256, 1)
-        #13X13X256
+        #(W-F)/S +1 = (26-3)/1 +1 = 24
+        self.conv4 = nn.Conv2d(128,  256, 3)
+        #12X12X256
         self.pool4 = nn.MaxPool2d(2,2)
+        #(W-F)/S +1 = (12-1)/1 +1 = 24
+        self.conv5 = nn.Conv2d(256,  512, 1)
+        #6X6X512
+        self.pool5 = nn.MaxPool2d(2,2)
         
-        self.fc1= nn.Linear(13*13*256,1024)
+        
+        self.fc1= nn.Linear(6*6*512,1024)
         self.fc2= nn.Linear(1024,136)
         
         self.dropout = nn.Dropout(p=0.2)
@@ -62,6 +67,8 @@ class Net(nn.Module):
         x= self.pool3(F.selu(self.conv3(x)))
         x= self.dropout(x)
         x =self.pool4(F.selu(self.conv4(x)))
+        x= self.dropout(x)
+        x =self.pool5(F.selu(self.conv5(x)))
         x= self.dropout(x)
         x = x.view(x.size(0), -1)
         x= F.selu(self.fc1(x))
