@@ -22,7 +22,7 @@ __Notebook 4__ : Fun Filters and Keypoint Uses
 
 
 
-### Setup Instructions
+## Setup Instructions
 
 1. Clone the repository, and navigate to the downloaded folder. This may take a minute or two to clone due to the included image data.
 ```
