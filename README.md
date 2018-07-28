@@ -69,7 +69,13 @@ All of the data to train a neural network is in the subdirectory `data`.
 
 
 ## Model Architecture and Training Strategy
+### Data preparation
+1. Rescaling and/or cropping the data, such that you are left with a square image (the suggested size is 224x224px)
+2. Normalizing the images and keypoints; turning each RGB image into a grayscale image with a color range of [0, 1] and transforming the 3. given keypoints into a range of [-1, 1]
+Turning these images and keypoints into Tensors
 
+
+### Model design
 The model designed for predicting the facial points in this project is given by:
 
 ![model](https://github.com/BrunoEduardoCSantos/Facial_Keypoints/blob/master/images/FacialKeysModel.png)
