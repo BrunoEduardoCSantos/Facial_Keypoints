@@ -88,7 +88,7 @@ The model designed for predicting the facial points in this project is given by:
 
 ## Further improvements
 
-* The next level : try transfert learning from pretrained network like ![vgg and  resnet] (https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html). The goal here is to used already working architecture and add a model for a specific task.
+* The next level : try transfert learning from pretrained network like [vgg and  resnet](https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html). The goal here is to used already working architecture and add a model for a specific task.
 
 
 
