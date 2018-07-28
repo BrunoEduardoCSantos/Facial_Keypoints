@@ -71,14 +71,26 @@ All of the data to train a neural network is in the subdirectory `data`.
 ## Model Architecture and Training Strategy
 ### Data preparation
 1. Rescaling and/or cropping the data, such that you are left with a square image (the suggested size is 224x224px)
-2. Normalizing the images and keypoints; turning each RGB image into a grayscale image with a color range of [0, 1] and transforming the 3. given keypoints into a range of [-1, 1]
-Turning these images and keypoints into Tensors
+2. Normalizing the images and keypoints; turning each RGB image into a grayscale image with a color range of [0, 1] and transforming the given keypoints into a range of [-1, 1]
+3.Turning these images and keypoints into Tensors
 
 
 ### Model design
 The model designed for predicting the facial points in this project is given by:
-
 ![model](https://github.com/BrunoEduardoCSantos/Facial_Keypoints/blob/master/images/FacialKeysModel.png)
+
+1. Adam was chosen for optimization and SmoothL1 for loss function. SmoothL1 was used as loss function because is less prone to outliers compared to MSE for larger values. In addition, it can include a error function like MSE for smaller value. Regarding the optimization Adam was the chosen one because it suitable for regression with deep learning architecture
+
+2. The initial model architecture was based on inception model, where it was setup layers 5X5 , 3X3 and 1X1. Afterward, it progressed by adding more convolution layers together with dropout layers to reduce the loss as well as avoid overfitting.
+
+3. The number of epochs was chosen by the loss function evaluation as well this hold monotonic descent. Regarding the batch_size it started from 10 and increased to 40 so that  loss function decreases error smoothly and continuosly.
+
+
+## Further improvements
+
+* The next level : try transfert learning from pretrained network like [vgg and  resnet] (https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html). The goal here is to used already working architecture and add a model for a specific task.
+
+
 
 
 
