@@ -68,7 +68,11 @@ pip install -r requirements.txt
 All of the data to train a neural network is in the subdirectory `data`. 
 
 
+## Model Architecture and Training Strategy
 
+The model designed for predicting the facial points in this project is given by:
+
+[!here](https://github.com/BrunoEduardoCSantos/Facial_Keypoints/blob/master/images/FacialKeysModel.png)
 
 
 
